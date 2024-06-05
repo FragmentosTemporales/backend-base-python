@@ -1,0 +1,2 @@
+Flake8-Flask==0.9.3
+Flask-Testing==0.8.1

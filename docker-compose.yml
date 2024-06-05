@@ -1,0 +1,47 @@
+services:
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=654321
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=database
+    volumes:
+      - "./db/pgdata:/var/lib/postgresql/data"
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+  scripts:
+    container_name: scripts_container
+    build:
+      context: scripts
+      dockerfile: Dockerfile
+    image: backend
+    restart: always
+    env_file:
+      - ./scripts/env.env
+    volumes:
+      - ./scripts:/scripts
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+
+    command: flask run -h 0.0.0.0 -p 4000
+
+volumes:
+  pgdata:

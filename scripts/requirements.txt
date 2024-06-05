@@ -1,0 +1,9 @@
+Flask==2.3.2
+Flask-Cors==3.0.10
+Flask-JWT-Extended==4.4.4
+Flask-Marshmallow==0.15.0
+Flask-Migrate==4.0.4
+Flask-SQLAlchemy==3.0.5
+Marshmallow-Sqlalchemy==0.29.0
+pandas
+psycopg2-binary==2.*
