@@ -6,7 +6,7 @@
 Para descargar la aplicación del repo, se debe escribir el siguiente comando:
 
 ```
-$ git clone https://github.com/FragmentosTemporales/risk-management
+$ git clone https://github.com/FragmentosTemporales/backend-base-python.git
 ```
 
 ### Variables de entorno
