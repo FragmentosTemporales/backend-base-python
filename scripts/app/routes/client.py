@@ -46,7 +46,7 @@ def create_client():
         client.user_id = user.id
         client.save_to_db()
 
-        return jsonify({"message": "User info created successfully!"}), 201
+        return jsonify({"message": "Client info created successfully!"}), 201
 
     except Exception as e:
         return jsonify({"error": "Internal server error", "message": str(e)}), 500
