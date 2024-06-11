@@ -66,7 +66,7 @@ def create_center():
         center.save_to_db()
         print("Creando centro de trabajo...")
 
-        return jsonify({"message": "Client info created successfully!"}), 201
+        return jsonify({"message": "Center created successfully!"}), 201
 
     except Exception as e:
         return jsonify({"error": "Internal server error", "message": str(e)}), 500

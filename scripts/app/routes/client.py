@@ -112,27 +112,38 @@ def update_user(client_id):
         uid = get_jwt_identity()
         user = User.find_by_email(uid)
         if user is None:
-            return jsonify(f"Usuario no encontrado."), 404
+            return jsonify({"error": "Usuario no encontrado."}), 404
 
         clientlist = Client.find_by_user_id(user.id)
-
         if not clientlist:
             return jsonify({"error": "Información no encontrada."}), 404
 
         client = next((c for c in clientlist if c.id == client_id), None)
         if not client:
-            return jsonify({"error": "Información no encontrada."}), 404
+            return jsonify({"error": "Cliente no encontrado."}), 404
 
         if request.method == "DELETE":
-            client.is_disabled = True
-            client.save_to_db()
-            return jsonify("CLIENTE DESHABILITADO"), 204
-        args_json = request.get_json()
-        try:
-            client.update(**args_json)
-            return jsonify("CLIENTE ACTUALIZADO"), 200
-        except Exception as e:
-            print (e)
-            raise e
+            return disable_client(client)
+        elif request.method == "PUT":
+            return update_client_info(client)
+
     except Exception as e:
         return jsonify({"error": "Internal server error", "message": str(e)}), 500
+
+def disable_client(client):
+    try:
+        client.is_disabled = True
+        client.save_to_db()
+        return jsonify({"message": "Client info updated successfully!"}), 204
+    except Exception as e:
+        return jsonify({"error": "Failed to disable client", "message": str(e)}), 500
+
+def update_client_info(client):
+    try:
+        args_json = request.get_json()
+        if 'rut' in args_json:
+            args_json['rut'] = args_json['rut'].replace('.', '').replace('-', '').lower()
+        client.update(**args_json)
+        return jsonify({"message": "Client info updated successfully!"}), 200
+    except Exception as e:
+        return jsonify({"error": "Failed to update client info", "message": str(e)}), 500
