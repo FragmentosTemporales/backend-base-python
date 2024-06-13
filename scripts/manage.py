@@ -2,6 +2,7 @@ import logging
 import click
 from flask.cli import FlaskGroup
 from app import create_app
+from app.helpers import Installer
 from app.models import User
 
 
@@ -22,6 +23,16 @@ def create_user(email, password):
     except Exception as e:
         error_message = str(e)
         logging.error(f"Error en create_user: {error_message}")
+
+
+@cli.command("install")
+def create_data():
+    """Create data un the app by comand line"""
+    try:
+        Installer()
+    except Exception as e:
+        error_message = str(e)
+        logging.error(f"Error en installer_app: {error_message}")
 
 
 @cli.command("test")

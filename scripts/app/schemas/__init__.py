@@ -57,4 +57,4 @@ class ClientSchema(SQLAlchemyAutoSchema):
 class CenterSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Center
-        load_instance = True
+        include_fk = True

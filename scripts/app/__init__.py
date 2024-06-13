@@ -7,6 +7,7 @@ from app.routes.auth import auth
 from app.routes.user import user
 from app.routes.user_info import user_info
 from app.routes.client import client
+from app.routes.center import center
 
 
 def create_app(test_mode=False):
@@ -28,5 +29,6 @@ def create_app(test_mode=False):
     app.register_blueprint(user)
     app.register_blueprint(user_info)
     app.register_blueprint(client)
+    app.register_blueprint(center)
 
     return app

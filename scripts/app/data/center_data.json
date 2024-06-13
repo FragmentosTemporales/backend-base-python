@@ -1,0 +1,18 @@
+[
+  {
+    "client_id": 1,
+    "name": "Maestranza Admaq",
+    "address": "República de Chile 0558",
+    "comuna": "Rancagua",
+    "region": "Libertador General Bernardo O'higgins",
+    "n_works": 9
+  },
+  {
+    "client_id": 2,
+    "name": "OFICINA PROVA CHILE",
+    "address": "AVENIDA APOQUINDO 7935",
+    "comuna": "LAS CONDES",
+    "region": "REGIÓN METROPOLITANA",
+    "n_works": 3
+  }
+]

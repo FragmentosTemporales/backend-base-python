@@ -23,10 +23,3 @@ run_command "Migrando Base de Datos" "python manage.py db migrate"
 
 print_header "       Actualizando Base de Datos          "
 run_command "Actualizando Base de Datos" "python manage.py db upgrade"
-
-print_header "              Creando Admin                "
-run_command "Creando Admin" "python manage.py create-user --email admin@admin.com --password admin"
-
-print_header "USER : admin@admin.com                    "
-print_header "PASS : admin                              "
-print_header "                Finalizando                "
