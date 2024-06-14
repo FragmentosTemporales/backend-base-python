@@ -1,5 +1,4 @@
 scripts/env.env
 scripts/migrations
-scripts/data
 .DS_Store
 db

@@ -60,3 +60,36 @@ def create_center():
 
     except Exception as e:
         return jsonify({"error": "Internal server error", "message": str(e)}), 500
+
+
+@center.route("/centerlist/<int:client_id>", methods=["GET"])
+@jwt_required()
+def get_center_list(client_id):
+    """Retorna la información de centros asociados"""
+    try:
+        uid = get_jwt_identity()
+        user = User.find_by_email(uid)
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        clientlist = Client.find_by_user_id(user.id)
+
+        if not clientlist:
+            return jsonify({"error": "Información no encontrada."}), 404
+
+        client = next((c for c in clientlist if c.id == client_id), None)
+
+        if not client:
+            return jsonify({"error": "Cliente no encontrado."}), 404
+        
+        center_data = Center.find_by_client_id(client.id)
+
+        center_list = centers_schema.dump(center_data)
+
+        print("Lista de centros: ",center_list)
+
+        return jsonify(center_list), 200
+
+
+    except Exception as e:
+        return jsonify({"error": "Internal server error", "message": str(e)}), 500
